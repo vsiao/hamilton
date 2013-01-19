@@ -3,28 +3,43 @@
 <head>
   <title>Hamilton</title>
   <link rel="stylesheet" type="text/css" href="reset.css" />
+  <link href="http://fonts.googleapis.com/css?family=Inconsolata:400,700" rel="stylesheet" type="text/css">
   <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 <body>
 <div class="container">
   <h1>Hamilton</h1>
-  <!--<ul id="nav">
-    <li><a href="#">DOT</a></li>
+  <ul id="nav">
+    <li><a href="#" id="dot-open">DOT</a></li>
     <li><a href="#">+</a></li>
-  </ul>-->
-  <form method="post" id="hamilton-dot">
-    <textarea id="dot-code"></textarea>
-    <button id="dot-go" type="submit">Go</button>
-  </form>
-  <canvas id="hamilton-canvas" width="960px" height="600px">
+  </ul>
+  <canvas id="hamilton-canvas" width="860px" height="600px">
   Bro, get some HTML5 Canvas.
   </canvas>
+  <div id="spotlight" style="display:none;">
+    <div id="wrapper">
+      <div id="stage">
+      <h2>Import DOT description</h2>
+      <form method="post" id="hamilton-dot">
+        <textarea id="dot-code"></textarea>
+        <input type="submit" id="dot-go" value="Go" />
+      </form>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+  <script type="text/javascript" src="lib/Dot.js"></script>
+
   <script type="text/javascript" src="lib/util.js"></script>
   <script type="text/javascript" src="lib/Hamilton.js"></script>
   <script type="text/javascript" src="lib/Vertex.js"></script>
   <script type="text/javascript" src="lib/Edge.js"></script>
   <script type="text/javascript" src="lib/Layout.js"></script>
   <script type="text/javascript">
+  $('#dot-open').click(function() { $('#spotlight').fadeIn(200); });
+  $('#stage').click(function(event) { event.stopPropagation(); });
+  $('#spotlight').click(function() { $(this).fadeOut(200); });
+  
   var hamilton = new Hamilton(document.getElementById('hamilton-canvas'));
   hamilton.addVertex(new Hamilton.Vertex());
   hamilton.addVertex(2, 225, 150);
@@ -38,8 +53,6 @@
   layout.applyLayout();
   hamilton.draw();
   </script>
-  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-  <script type="text/javascript" src="lib/Dot.js"></script>
 </div>
 </body>
 </html>

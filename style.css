@@ -19,16 +19,79 @@ h1 {
   margin: 0 auto;
   width: 960px;
 }
+#nav {
+  clear: left;
+  float: right;
+  width: 100px;
+}
 #nav li {
-  float: left;
+  margin-bottom: 1px;
 }
 #nav li a {
+  background: #349f9f;
+  border-radius: 0 2px 2px 0;
+  color: #fff;
   display: block;
+  font-size: 20px;
+  font-weight: 700;
   line-height: 36px;
-  min-width: 80px;
-  padding: 20px;
+  padding: 20px 0;
   text-align: center;
+  text-decoration: none;
+  width: 100px;
 }
 #hamilton-canvas {
   background: #fff;
+}
+#spotlight {
+  background: rgba(0,0,0,0.9);
+  /*display: table;*/
+  height: 100%;
+  left: 0;
+  position: absolute;
+  /*table-layout: fixed;*/
+  top: 0;
+  width: 100%;
+  z-index: 100;
+}
+#wrapper {
+  /*display: table-cell;*/
+  padding-top: 100px;
+  text-align: center;
+  vertical-align: middle;
+  width: 100%;
+}
+#stage {
+  background: #218484;
+  box-shadow: 0 0 20px #000;
+  display: inline-block;
+  position: relative;
+  text-align: left;
+}
+#spotlight h2 {
+  color: #fff;
+  font-size: 24px;
+  padding: 15px 20px 10px;
+}
+#dot-code {
+  border: none;
+  display: block;
+  font-family: Inconsolata, Courier New, monospace;
+  font-size: 14px;
+  height: 200px;
+  margin: 0;
+  padding: 10px;
+  resize: none;
+  width: 580px;
+}
+#dot-go {
+  background: #9ace33;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  float: right;
+  font-size: 14px;
+  margin: 0;
+  padding: 10px 20px;
 }
