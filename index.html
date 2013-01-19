@@ -29,11 +29,11 @@
   <script type="text/javascript">
   var hamilton = new Hamilton(document.getElementById('hamilton-canvas'));
   hamilton.addVertex(new Hamilton.Vertex());
-  hamilton.addVertex(new Hamilton.Vertex({id:2,x:100,y:50}));
-  hamilton.addVertex(new Hamilton.Vertex({id:3,x:150,y:50}));
-  hamilton.addVertex(new Hamilton.Vertex({id:0,x:125,y:75}));
-  hamilton.addEdge(new Hamilton.Edge({u_id:2,v_id:3}));
-  hamilton.addEdge(new Hamilton.Edge({u_id:0,v_id:3}));
+  hamilton.addVertex(2, 100, 50);
+  hamilton.addVertex('derp', 150, 50);
+  hamilton.addVertex(0, 125, 75);
+  hamilton.addEdge(2, 'derp');
+  hamilton.addEdge(0, 'derp');
   hamilton.draw();
   </script>
 </body>
