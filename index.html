@@ -30,6 +30,7 @@
   <script type="text/javascript" src="lib/Hamilton.js"></script>
   <script type="text/javascript" src="lib/Vertex.js"></script>
   <script type="text/javascript" src="lib/Edge.js"></script>
+  <script type="text/javascript" src="lib/Layout.js"></script>
   <script type="text/javascript">
   var hamilton = new Hamilton(document.getElementById('hamilton-canvas'));
   hamilton.addVertex(new Hamilton.Vertex());
@@ -38,6 +39,10 @@
   hamilton.addVertex(0, 125, 75);
   hamilton.addEdge(2, 'derp');
   hamilton.addEdge(0, 'derp');
+	var layout = new Layout(hamilton);
+	console.log(hamilton);
+  layout.layout();
+  layout.applyLayout();
   hamilton.draw();
   </script>
   <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
