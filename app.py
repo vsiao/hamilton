@@ -17,14 +17,20 @@ def parse():
     print dotfile
     data = dotfile.encode('ascii','ignore') # because unicode strings lose edges
     graph = pydot.graph_from_dot_data(data)
+    gattr = graph.get_attributes()
+    for (k,v) in gattr.iteritems(): gattr[k] = v[1:-1]
     return_json = {'nodes': [], 'edges': [], 'name' : graph.get_name(),
                    'type': graph.get_type(),
-                   'attributes': graph.get_attributes() }
+                   'attributes': gattr }
     for x in graph.get_node_list():
-      return_json['nodes'].append({'attributes' : x.get_attributes(),
+      attr = x.get_attributes()
+      for (k,v) in attr.iteritems(): attr[k] = v[1:-1]
+      return_json['nodes'].append({'attributes' : attr,
                                    'name' : x.get_name()})
     for y in graph.get_edge_list():
-      return_json['edges'].append({'attributes' : y.get_attributes(),
+      attr = y.get_attributes()
+      for (k,v) in attr.iteritems(): attr[k] = v[1:-1]
+      return_json['edges'].append({'attributes' : attr,
                                    'source' : y.get_source(),
                                    'destination' : y.get_destination()})
     return_json['status'] = 'success'

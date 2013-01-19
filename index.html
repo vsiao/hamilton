@@ -36,22 +36,29 @@
   <script type="text/javascript" src="lib/Edge.js"></script>
   <script type="text/javascript" src="lib/Layout.js"></script>
   <script type="text/javascript">
-  $('#dot-open').click(function() { $('#spotlight').fadeIn(200); });
-  $('#stage').click(function(event) { event.stopPropagation(); });
-  $('#spotlight').click(function() { $(this).fadeOut(200); });
-  
   var hamilton = new Hamilton(document.getElementById('hamilton-canvas'));
+  hamilton.name = "example";
+  hamilton.type = "graph";
   hamilton.addVertex(new Hamilton.Vertex());
   hamilton.addVertex(2, 225, 150);
   hamilton.addVertex('derp', 200, 50);
   hamilton.addVertex(0, 150, 100);
   hamilton.addEdge(2, 'derp');
   hamilton.addEdge(0, 'derp');
-	var layout = new Layout(hamilton);
-	console.log(hamilton);
+  var layout = new Layout(hamilton);
+  console.log(hamilton);
   layout.layout();
   layout.applyLayout();
   hamilton.draw();
+
+  $('#dot-open').click(function() {
+                          $('#dot-code').val(hamilton.toDot());
+                          $('#spotlight').fadeIn(200);
+  });
+
+  $('#stage').click(function(event) { event.stopPropagation(); });
+  $('#spotlight').click(function() { $(this).fadeOut(200); });
+
   </script>
 </div>
 </body>
