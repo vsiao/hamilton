@@ -3,27 +3,20 @@
 <head>
   <title>Hamilton</title>
   <link rel="stylesheet" type="text/css" href="reset.css" />
-  <style type="text/css">
-  body {
-    font-family: Helvetica, Arial, sans-serif;
-    padding: 30px 50px;
-  }
-  h1 {
-    font-size: 36px;
-    margin-bottom: 10px;
-  }
-  #hamilton-canvas {
-    border: 1px solid #ddd;
-  }
-  </style>
+  <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 <body>
+<div class="container">
   <h1>Hamilton</h1>
+  <!--<ul id="nav">
+    <li><a href="#">DOT</a></li>
+    <li><a href="#">+</a></li>
+  </ul>-->
   <form method="post" id="hamilton-dot">
     <textarea id="dot-code"></textarea>
     <button id="dot-go" type="submit">Go</button>
   </form>
-  <canvas id="hamilton-canvas" width="600px" height="600px">
+  <canvas id="hamilton-canvas" width="960px" height="600px">
   Bro, get some HTML5 Canvas.
   </canvas>
   <script type="text/javascript" src="lib/util.js"></script>
@@ -34,9 +27,9 @@
   <script type="text/javascript">
   var hamilton = new Hamilton(document.getElementById('hamilton-canvas'));
   hamilton.addVertex(new Hamilton.Vertex());
-  hamilton.addVertex(2, 100, 50);
-  hamilton.addVertex('derp', 150, 50);
-  hamilton.addVertex(0, 125, 75);
+  hamilton.addVertex(2, 225, 150);
+  hamilton.addVertex('derp', 200, 50);
+  hamilton.addVertex(0, 150, 100);
   hamilton.addEdge(2, 'derp');
   hamilton.addEdge(0, 'derp');
 	var layout = new Layout(hamilton);
@@ -47,5 +40,6 @@
   </script>
   <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
   <script type="text/javascript" src="lib/Dot.js"></script>
+</div>
 </body>
 </html>
