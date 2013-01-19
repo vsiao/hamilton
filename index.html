@@ -19,6 +19,10 @@
 </head>
 <body>
   <h1>Hamilton</h1>
+  <form method="post" id="hamilton-dot">
+    <textarea id="dot-code"></textarea>
+    <button id="dot-go" type="submit">Go</button>
+  </form>
   <canvas id="hamilton-canvas" width="600px" height="600px">
   Bro, get some HTML5 Canvas.
   </canvas>
@@ -36,5 +40,7 @@
   hamilton.addEdge(0, 'derp');
   hamilton.draw();
   </script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+  <script type="text/javascript" src="lib/Dot.js"></script>
 </body>
 </html>
