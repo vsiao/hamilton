@@ -19,7 +19,114 @@
 </head>
 <body>
   <h1>Hamilton</h1>
-  <canvas id="hamilton-canvas" width="600px" height="600px"></canvas>
-  <script type="text/javascript" href="
+  <canvas id="hamilton-canvas" width="600px" height="600px">
+  Bro, get some HTML5 Canvas.
+  </canvas>
+  <script type="text/javascript">
+  function copyProperties(defaults, props) {
+    var key;
+    for (key in props) {
+      defaults[key] = props[key];
+    }
+  }
+
+  function HamiltonVertex(props) {
+    this.props = {
+      x: 50,
+      y: 50,
+      r: 10,
+      stroke: {
+        width: 3
+      }
+    };
+    copyProperties(this.props, props);
+  }
+
+  HamiltonVertex.prototype.draw = function(context) {
+    context.save();
+    context.beginPath();
+    context.lineWidth = this.props.stroke.width;
+    if (this._hover) {
+      context.strokeStyle = 'blue';
+    }
+    context.arc(this.props.x, this.props.y, this.props.r, 0, 2*Math.PI);
+    context.stroke();
+    context.restore();
+  };
+
+  HamiltonVertex.prototype.onMouseEnter = function(event) {
+    this._hover = true;
+    document.body.style.cursor = 'pointer';
+    this.draw(event.target.getContext('2d'));
+  };
+
+  HamiltonVertex.prototype.onMouseLeave = function(event) {
+    this._hover = false;
+    document.body.style.cursor = 'default';
+    this.draw(event.target.getContext('2d'));
+  };
+
+  function Hamilton(canvas) {
+    this.canvas = canvas;
+    this.context = canvas.getContext('2d');
+    this.vertices = [];
+    var self = this;
+    function onMouseMove() {
+      self._onMouseMove.apply(self, arguments);
+    }
+    this.canvas.addEventListener('mousemove', onMouseMove);
+    this._listener = onMouseMove;
+  }
+
+  Hamilton.Vertex = HamiltonVertex;
+
+  Hamilton.prototype.draw = function() {
+    var i;
+    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    for (i = 0; i < this.vertices.length; ++i) {
+      this.context.save();
+      this.vertices[i].__HAM__drawn = true;
+      this.vertices[i].draw(this.context);
+      this.context.restore();
+    }
+  };
+
+  Hamilton.prototype.addVertex = function(vertex) {
+    if (!vertex instanceof Hamilton.Vertex) {
+      return;
+    }
+    this.vertices.push(vertex);
+  };
+
+  function dist(x1, y1, x2, y2) {
+    return Math.sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
+  }
+
+  Hamilton.prototype._onMouseMove = function(event) {
+    var i, x = event.layerX, y = event.layerY;
+    for (i = 0; i < this.vertices.length; ++i) {
+      var v = this.vertices[i];
+      if (dist(v.props.x, v.props.y, x, y) <= v.props.r) {
+        if (v.__HAM__drawn && !v.__HAM__hover) {
+          v.__HAM__hover = true;
+          if (v.onMouseEnter(event) === false) {
+            break;
+          }
+        }
+      } else {
+        if (v.__HAM__hover) {
+          v.__HAM__hover = false;
+          if (v.onMouseLeave(event) === false) {
+            break;
+          }
+        }
+      }
+    }
+  };
+
+  var hamilton = new Hamilton(document.getElementById('hamilton-canvas'));
+  hamilton.addVertex(new Hamilton.Vertex());
+  hamilton.draw();
+  </script>
 </body>
 </html>
