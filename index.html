@@ -25,10 +25,15 @@
   <script type="text/javascript" src="lib/util.js"></script>
   <script type="text/javascript" src="lib/Hamilton.js"></script>
   <script type="text/javascript" src="lib/Vertex.js"></script>
+  <script type="text/javascript" src="lib/Edge.js"></script>
   <script type="text/javascript">
   var hamilton = new Hamilton(document.getElementById('hamilton-canvas'));
   hamilton.addVertex(new Hamilton.Vertex());
-  hamilton.addVertex(new Hamilton.Vertex({x:100,y:50}));
+  hamilton.addVertex(new Hamilton.Vertex({id:2,x:100,y:50}));
+  hamilton.addVertex(new Hamilton.Vertex({id:3,x:150,y:50}));
+  hamilton.addVertex(new Hamilton.Vertex({id:0,x:125,y:75}));
+  hamilton.addEdge(new Hamilton.Edge({u_id:2,v_id:3}));
+  hamilton.addEdge(new Hamilton.Edge({u_id:0,v_id:3}));
   hamilton.draw();
   </script>
 </body>
