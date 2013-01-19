@@ -505,16 +505,14 @@ def parse_dot_data(data):
 
     top_graphs = list()
 
-    if data.startswith(codecs.BOM_UTF8):
-        data = data.decode( 'utf-8' )
+#    if data.startswith(codecs.BOM_UTF8):
+#        data = data.decode( 'utf-8' )
 
     try:
-
         graphparser = graph_definition()
 
         if pyparsing_version >= '1.2':
             graphparser.parseWithTabs()
-
         tokens = graphparser.parseString(data)
 
         if len(tokens) == 1:
