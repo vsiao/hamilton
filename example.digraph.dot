@@ -1,0 +1,10 @@
+digraph graph{
+  a -> b
+  b -> c
+  d -> e
+  f
+  a [label="hello",shape=ellipse,fillcolor="burlywood",style="filled"];
+  b [label="graphviz",shape=box,fillcolor="palegreen",style="filled,rounded"];
+  c [label="hi",color="blue"]
+
+}

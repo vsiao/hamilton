@@ -1,0 +1,9 @@
+graph g {
+
+a -- b
+b -- c
+d -- e
+e -- a
+f
+
+}
