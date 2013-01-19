@@ -54,18 +54,6 @@
     context.restore();
   };
 
-  HamiltonVertex.prototype.onMouseEnter = function(event) {
-    this._hover = true;
-    document.body.style.cursor = 'pointer';
-    this.draw(event.target.getContext('2d'));
-  };
-
-  HamiltonVertex.prototype.onMouseLeave = function(event) {
-    this._hover = false;
-    document.body.style.cursor = 'default';
-    this.draw(event.target.getContext('2d'));
-  };
-
   function Hamilton(canvas) {
     this.canvas = canvas;
     this.context = canvas.getContext('2d');
@@ -101,25 +89,30 @@
   function dist(x1, y1, x2, y2) {
     return Math.sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
   }
+  function hoverVtx(v, x, y) {
+    return dist(v.props.x, v.props.y, x, y) <= v.props.r;
+  }
 
   Hamilton.prototype._onMouseMove = function(event) {
     var i, x = event.layerX, y = event.layerY;
-    for (i = 0; i < this.vertices.length; ++i) {
+    if (this._focusVtx) {
+      if (hoverVtx(this._focusVtx, x, y)) {
+        return;
+      }
+      this._focusVtx._hover = false;
+      this._focusVtx.draw(event.target.getContext('2d'));
+      document.body.style.cursor = 'default';
+      this._focusVtx = null;
+    }
+    // Iterate from back to front ~ top to bottom stack rendering order
+    for (i = this.vertices.length - 1; i >= 0; --i) {
       var v = this.vertices[i];
-      if (dist(v.props.x, v.props.y, x, y) <= v.props.r) {
-        if (v.__HAM__drawn && !v.__HAM__hover) {
-          v.__HAM__hover = true;
-          if (v.onMouseEnter(event) === false) {
-            break;
-          }
-        }
-      } else {
-        if (v.__HAM__hover) {
-          v.__HAM__hover = false;
-          if (v.onMouseLeave(event) === false) {
-            break;
-          }
-        }
+      if (hoverVtx(v, x, y)) {
+        v._hover = true;
+        v.draw(event.target.getContext('2d'));
+        document.body.style.cursor = 'pointer';
+        this._focusVtx = v;
+        break;
       }
     }
   };
