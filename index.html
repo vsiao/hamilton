@@ -16,6 +16,10 @@
   <canvas id="hamilton-canvas" width="860px" height="600px">
   Bro, get some HTML5 Canvas.
   </canvas>
+	<img id="canvasImg" alt="Right click to save me!">
+	<canvas id="capture-canvas">
+  Broseph
+  </canvas>
   <div id="spotlight" style="display:none;">
     <div id="wrapper">
       <div id="stage">
@@ -55,9 +59,34 @@
                           $('#dot-code').val(hamilton.toDot());
                           $('#spotlight').fadeIn(200);
   });
-
   $('#stage').click(function(event) { event.stopPropagation(); });
   $('#spotlight').click(function() { $(this).fadeOut(200); });
+
+	$('#save-canvas').click(function() { doImageCapture(hamilton);});
+  function doImageCapture(graph) {
+    var maxx = -Infinity, minx = Infinity, maxy = -Infinity, miny = Infinity;
+    var canvas = document.getElementById('capture-canvas');
+    var context = canvas.getContext("2d");
+
+    for (id in graph.vertices) {
+	    var x = graph.vertices[id].props.x,
+          y = graph.vertices[id].props.y;
+      if(x > maxx) maxx = x;
+	    if(x < minx) minx = x;
+      if(y > maxy) maxy = y;
+      if(y < miny) miny = y;
+	  }
+
+	  var imgData = graph.context.getImageData(minx-30, miny-30, (maxx-minx+60), (maxy-miny+60));
+
+		canvas.width = (maxx-minx+60);
+    canvas.height = (maxy-miny+60);
+    context.putImageData(imgData, 0,0);
+
+    document.getElementById('canvasImg').src = canvas.toDataURL();
+  }
+
+
 
   </script>
 </div>

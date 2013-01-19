@@ -43,6 +43,10 @@ h1 {
 #hamilton-canvas {
   background: #fff;
 }
+#capture-canvas {
+  background: #fff;
+  visibility: hidden;
+}
 #spotlight {
   background: rgba(0,0,0,0.9);
   /*display: table;*/
