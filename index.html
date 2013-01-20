@@ -53,6 +53,7 @@
   <script type="text/javascript" src="/static/lib/util.js"></script>
   <script type="text/javascript" src="/static/lib/Hamilton.js"></script>
   <script type="text/javascript" src="/static/lib/Vertex.js"></script>
+  <script type="text/javascript" src="/static/lib/VtxMenu.js"></script>
   <script type="text/javascript" src="/static/lib/Edge.js"></script>
   <script type="text/javascript" src="/static/lib/Layout.js"></script>
   <script type="text/javascript">
@@ -94,6 +95,14 @@
     }
 
     hamilton.draw();
+
+    $(document).keyup(function(event) {
+      if (event.keyCode === 13 /* ENTER */) {
+        if (hamilton._NAMECHANGER10K) {
+          hamilton.confirmName();
+        }
+      }
+    });
 
     $('#dot-open').click(function() {
       $('#dot-code').val(hamilton.toDot());
@@ -142,10 +151,10 @@
         if(y > maxy) maxy = y;
         if(y < miny) miny = y;
       }
-      graph._noGrid = true;
+      graph._capture = true;
       graph.draw();
       var imgData = graph.context.getImageData(minx-30, miny-30, (maxx-minx+60), (maxy-miny+60));
-      graph._noGrid = false;
+      graph._capture = false;
       graph.draw();
       canvas.width = (maxx-minx+60);
       canvas.height = (maxy-miny+60);

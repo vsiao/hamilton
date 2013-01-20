@@ -20,6 +20,7 @@ h1 {
 }
 .container {
   margin: 0 auto;
+  position: relative;
   width: 960px;
 }
 #nav {
@@ -159,4 +160,14 @@ h1 {
   font-size: 14px;
   margin: 0px 10px 0px 0px;
   padding: 10px 20px;
+}
+#vtx-name-change {
+  background: #fff;
+  border: none;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  display: none;
+  position: absolute;
+  text-align: center;
+  width: 30px;
 }
