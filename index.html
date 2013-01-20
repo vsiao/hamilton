@@ -59,16 +59,39 @@
   hamilton.name = "example";
   hamilton.type = "graph";
   hamilton.addVertex(new Hamilton.Vertex());
-  hamilton.addVertex(2, 225, 150);
+  hamilton.addVertex('2', 225, 150);
   hamilton.addVertex('derp', 200, 50);
-  hamilton.addVertex(0, 150, 100);
-  hamilton.addEdge(2, 'derp');
-  hamilton.addEdge(0, 'derp');
+  hamilton.addVertex('0', 150, 100);
+  hamilton.addEdge('2', 'derp');
+  hamilton.addEdge('0', 'derp');
   var layout = new Layout(hamilton);
   console.log(hamilton);
   layout.layout();
   layout.applyLayout();
   hamilton.draw();
+
+
+	function uniqueName(vertices) {
+    var name;
+    var done = false;
+    name = prompt("Enter a vertex label (1-4 characters:");
+    if (name in vertices) {
+      while(!done) {
+        name = prompt("The entered label is in use.\n Enter another vertex label (1-4 characters:");
+        if (name in vertices) done = false
+	      else done = true;
+      }
+    }
+    return name;
+  }
+
+  $('#add-node').click(function() {
+	                        var x = (hamilton.canvas.width-80) * Math.random();
+	                        var y = (hamilton.canvas.height-80) * Math.random();
+                          var name = prompt("Enter a vertex label (1-4 characters:");
+                          hamilton.addVertex(name, x, y);
+                          hamilton.draw();
+  });
 
   $('#dot-open').click(function() {
                           $('#dot-code').val(hamilton.toDot());
