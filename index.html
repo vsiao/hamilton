@@ -11,7 +11,8 @@
   <h1>Hamilton</h1>
   <ul id="nav">
     <li><a href="#" id="dot-open">DOT</a></li>
-    <li><a href="#">+V</a></li>
+    <li><a href="#" id="add-vtx">+V</a></li>
+<!--    <li><a href="#">&ndash;E</a></li>-->
     <li><a href="#" id="save-canvas"><img src="/static/img/download.png" width="40" height="30"></a></li>
     <li><a href="#" id="share-link"><img src="/static/img/share.png" width="30" height="30"></a></li>
   </ul>
@@ -135,11 +136,20 @@
       $('#spotlight').fadeIn(200);
     });
 
-    $('#add-node').click(function() {
-      var x = (hamilton.canvas.width-80) * Math.random();
-      var y = (hamilton.canvas.height-80) * Math.random();
-      hamilton.addVertex("wwq", x, y);
+    $('#add-vtx').click(function() {
+      if (hamilton._dummy) {
+        delete hamilton.vertices[hamilton._dummy.id];
+        hamilton._dummy = null;
+        hamilton.draw();
+        return;
+      }
+      hamilton.confirmName();
+      hamilton._selected &&
+        (hamilton._selected._selected = false, hamilton._selected = null);
+      hamilton._EDGEADDER9000 = false;
       hamilton.draw();
+      hamilton.ENTERVERTEXADDMODE();
+      return false;
     });
 
     function doImageCapture(graph) {

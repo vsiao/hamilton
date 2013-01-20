@@ -175,6 +175,7 @@ h1 {
   display: none;
   position: absolute;
   text-align: center;
+  width: 30px;
 }
 
 #copy-button {
