@@ -115,7 +115,7 @@ h1 {
   box-shadow: 0 0 20px #000;
   display: inline-block;
   position: relative;
-  text-align: left;
+  text-align: center;
 }
 
 #help-dialog {
@@ -153,12 +153,12 @@ h1 {
 #canvas-img {
   background: #fff;
   display: inline-block;
-  align: center;
 }
 #spotlight h2 {
   color: #fff;
   font-size: 24px;
   padding: 15px 20px 10px;
+  text-align: left;
 }
 #spotlight h3 {
   color: #fff;
@@ -170,7 +170,7 @@ h1 {
   border: none;
   display: block;
   font-family: Inconsolata, Courier New, monospace;
-  font-size: 14px;
+  font-size: 18px;
   height: 200px;
   margin: 0;
   padding: 10px;
@@ -196,7 +196,7 @@ h1 {
   display: inline-block;
   float: right;
   font-size: 14px;
-  margin: 0px 10px 0px 0px;
+  margin: 0;
   padding: 10px 20px;
 }
 
