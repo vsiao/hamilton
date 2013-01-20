@@ -103,9 +103,9 @@ h1 {
 	background: #fff;
   font-size: 24px;
 	font-weight: 200;
-  display: inline-block;
-  margin-top: 10px;
-  padding: 20px 20px 10px;
+  display: block;
+  margin-bottom: 10px;
+  padding: 10px 15px 10px 20px;
   width: 200;
   white-space: normal;
 }
@@ -180,8 +180,8 @@ h1 {
 
 #copy-button {
   background: #349f9f;
-  margin-left: 5px;
-  margin-top: -4px;
+  margin-left: 15px;
+  margin-top: -3px;
   height: 30px;
   float: right;
 }
