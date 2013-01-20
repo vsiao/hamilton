@@ -5,9 +5,10 @@ import os
 import pydot
 import shortuuid
 from dot_parser import ParseException
-from pymongo import MongoClient
+from pymongo import Connection
 
 MONGO_URI = "mongodb://localhost"
+MONGO_NS = "hamilton"
 DEBUG = True
 
 app = Flask(__name__, static_folder=".", template_folder=".", static_url_path="/static")
@@ -16,7 +17,8 @@ app.config.from_envvar('HAMILTON_SETTINGS', silent=True)
 
 @app.before_request
 def connect_to_db():
-  g.db = MongoClient(app.config["MONGO_URI"]).hamilton
+  conn = Connection(app.config["MONGO_URI"])
+  g.db = conn[app.config["MONGO_NS"]]
 
 @app.teardown_request
 def disconnect_from_db(exception):
@@ -63,7 +65,7 @@ def create_fiddle():
     uid = shortuuid.uuid()[:8]
     g.db.graphs.insert({'uid': uid, 'graph': graphobj})
     return json.dumps({'status': 'success', 'uid': unicode(uid)})
-  except KeyError, err:
+  except KeyError as err:
     message = err.line + ": sent bad graph data: %s" % str(err)
     return json.dumps({'status': 'error', 'message': unicode(message)})
 
@@ -74,7 +76,7 @@ def get_fiddle(fiddle_id):
     del graph['_id']
     return render_template('index.html', graph=json.dumps(graph))
   else:
-    # raise 404
+    # TODO raise 404
     return "you suck"
 
 if __name__ == '__main__':
