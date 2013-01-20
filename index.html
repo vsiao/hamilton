@@ -16,7 +16,7 @@
   <canvas id="hamilton-canvas" width="860px" height="600px">
   Bro, get some HTML5 Canvas.
   </canvas>
-	<canvas id="capture-canvas">
+  <canvas id="capture-canvas">
   Broseph
   </canvas>
   <div id="spotlight" style="display:none;">
@@ -25,13 +25,14 @@
       <h2>Import DOT description</h2>
       <form method="post" id="hamilton-dot">
         <textarea id="dot-code"></textarea>
-        <input type="submit" id="dot-go" value="Go" />
+        <input type="button" id="dot-go" value="Go" />
+        <input type="button" id="reset-layout" value="Reset" />
       </form>
       </div>
       <div id="stage-img">
       <h2>Export to image.</h2>
-			<img id="canvas-img" alt="Right click to save me!">
-			<h3>Right click and select save as...</h3>
+      <img id="canvas-img" alt="Right click to save me!">
+      <h3>Right click and select save as...</h3>
       </div>
     </div>
   </div>
@@ -61,37 +62,37 @@
 
   $('#dot-open').click(function() {
                           $('#dot-code').val(hamilton.toDot());
-	                        $('#stage-img').hide();
-	                        $('#stage-dot').show();
+                          $('#stage-img').hide();
+                          $('#stage-dot').show();
                           $('#spotlight').fadeIn(200);
   });
   $('#stage-dot').click(function(event) { event.stopPropagation(); });
   $('#spotlight').click(function() { $(this).fadeOut(200); });
 
-	$('#save-canvas').click(function() {
+  $('#save-canvas').click(function() {
                           doImageCapture(hamilton);
                           $('#stage-dot').hide();
                           $('#stage-img').show();
                           $('#spotlight').fadeIn(200);
-	});
+  });
   function doImageCapture(graph) {
     var maxx = -Infinity, minx = Infinity, maxy = -Infinity, miny = Infinity;
     var canvas = document.getElementById('capture-canvas');
     var context = canvas.getContext("2d");
 
     for (id in graph.vertices) {
-	    var x = graph.vertices[id].props.x,
+      var x = graph.vertices[id].props.x,
           y = graph.vertices[id].props.y;
       if(x > maxx) maxx = x;
-	    if(x < minx) minx = x;
+      if(x < minx) minx = x;
       if(y > maxy) maxy = y;
       if(y < miny) miny = y;
-	  }
-		graph.drawGrid = false;
+    }
+    graph.drawGrid = false;
     graph.draw();
-	  var imgData = graph.context.getImageData(minx-30, miny-30, (maxx-minx+60), (maxy-miny+60));
-		graph.drawGrid = true;
-		canvas.width = (maxx-minx+60);
+    var imgData = graph.context.getImageData(minx-30, miny-30, (maxx-minx+60), (maxy-miny+60));
+    graph.drawGrid = true;
+    canvas.width = (maxx-minx+60);
     canvas.height = (maxy-miny+60);
     context.putImageData(imgData, 0,0);
 

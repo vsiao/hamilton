@@ -119,3 +119,14 @@ h1 {
   margin: 0;
   padding: 10px 20px;
 }
+#reset-layout {
+  background: #dd3636;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  float: right;
+  font-size: 14px;
+  margin: 0px 10px 0px 0px;
+  padding: 10px 20px;
+}
