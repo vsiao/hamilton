@@ -13,7 +13,7 @@
     <li><a href="#" id="dot-open">DOT</a></li>
     <li><a href="#">+V</a></li>
     <li><a href="#">&ndash;E</a></li>
-    <li><a href="#" id="save-canvas"><img src="img/download.png" width="40" height="30"></a></li>
+    <li><a href="#" id="save-canvas"><img src="/static/img/download.png" width="40" height="30"></a></li>
     <li><a href="#" id="share-link"><img src="/static/img/share.png" width="30" height="30"></a></li>
   </ul>
   <canvas id="hamilton-canvas" width="901px" height="601px">
@@ -126,10 +126,11 @@
         if(y > maxy) maxy = y;
         if(y < miny) miny = y;
       }
-      graph.drawGrid = false;
+      graph._noGrid = true;
       graph.draw();
       var imgData = graph.context.getImageData(minx-30, miny-30, (maxx-minx+60), (maxy-miny+60));
-      graph.drawGrid = true;
+      graph._noGrid = false;
+      graph.draw();
       canvas.width = (maxx-minx+60);
       canvas.height = (maxy-miny+60);
       context.putImageData(imgData, 0,0);
