@@ -4,16 +4,19 @@
  * #9ace33
  */
 body {
-  background: #9ace33;
+  background: #add855;
   font-family: Helvetica, Arial, sans-serif;
 }
 h1 {
   background: #dd3636;
+  border: 1px solid transparent;
   color: #fff;
   display: inline-block;
   float: left;
   font-size: 36px;
-  padding: 20px;
+  padding: 20px 0;
+  text-align: center;
+  width: 199px;
 }
 .container {
   margin: 0 auto;
@@ -22,23 +25,26 @@ h1 {
 #nav {
   clear: left;
   float: right;
-  width: 100px;
+  width: 49px;
 }
 #nav li {
   margin-bottom: 1px;
 }
 #nav li a {
   background: #349f9f;
-  border-radius: 0 2px 2px 0;
   color: #fff;
   display: block;
   font-size: 20px;
   font-weight: 700;
-  line-height: 37px;
-  padding: 20px 0;
+  height: 33px;
+  padding-top: 16px;
   text-align: center;
   text-decoration: none;
-  width: 100px;
+  width: 55px;
+}
+#nav img {
+  position: relative;
+  top: -7px;
 }
 #nav li span {
   background: #9ace33;
