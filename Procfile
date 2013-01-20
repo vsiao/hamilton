@@ -1,1 +1,1 @@
-web: HAMILTON_SETTINGS=settings.cfg python app.py
+web: export HAMILTON_SETTINGS=settings.cfg; python app.py
