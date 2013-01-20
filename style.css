@@ -84,6 +84,7 @@ h1 {
 }
 #canvas-img {
   background: #fff;
+  align: center;
 }
 #spotlight h2 {
   color: #fff;
