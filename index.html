@@ -12,7 +12,6 @@
   <ul id="nav">
     <li><a href="#" id="dot-open">DOT</a></li>
     <li><a href="#">+V</a></li>
-    <li><a href="#">&ndash;E</a></li>
     <li><a href="#" id="save-canvas"><img src="/static/img/download.png" width="40" height="30"></a></li>
     <li><a href="#" id="share-link"><img src="/static/img/share.png" width="30" height="30"></a></li>
   </ul>
@@ -62,7 +61,7 @@
   <script type="text/javascript" src="/static/lib/Edge.js"></script>
   <script type="text/javascript" src="/static/lib/Layout.js"></script>
   <script type="text/javascript">
-    var hamilton, layout, graph, fgraph, clip; 
+    var hamilton, layout, graph, fgraph, clip;
     fgraph = {{ graph|safe }};
     graph = fgraph['graph'] || {};
     hamilton = new Hamilton(document.getElementById('hamilton-canvas'));
@@ -168,7 +167,7 @@
       document.getElementById('canvas-img').src = canvas.toDataURL();
 
       clip = new ZeroClipboard($('#clipboard'), {
-        moviePath: "/static/ZeroClipboard.swf"    
+        moviePath: "/static/ZeroClipboard.swf"
       });
     }
   </script>
