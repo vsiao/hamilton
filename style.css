@@ -115,17 +115,17 @@ h1 {
   box-shadow: 0 0 20px #000;
   display: inline-block;
   position: relative;
-  text-align: left;
+  text-align: center;
 }
 #canvas-img {
   background: #fff;
   display: inline-block;
-  align: center;
 }
 #spotlight h2 {
   color: #fff;
   font-size: 24px;
   padding: 15px 20px 10px;
+  text-align: left;
 }
 #spotlight h3 {
   color: #fff;
@@ -163,7 +163,6 @@ h1 {
   display: inline-block;
   float: right;
   font-size: 14px;
-  margin: 0px 10px 0px 0px;
   padding: 10px 20px;
 }
 
