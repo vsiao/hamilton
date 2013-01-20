@@ -20,7 +20,8 @@ def connect_to_db():
 
 @app.teardown_request
 def disconnect_from_db(exception):
-  g.db.connection.disconnect()
+  if hasattr(g, 'db'):
+    g.db.connection.disconnect()
 
 @app.route('/')
 def index():
