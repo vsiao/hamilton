@@ -55,85 +55,113 @@
   <script type="text/javascript" src="lib/Edge.js"></script>
   <script type="text/javascript" src="lib/Layout.js"></script>
   <script type="text/javascript">
-  var hamilton = new Hamilton(document.getElementById('hamilton-canvas'));
-  hamilton.name = "example";
-  hamilton.type = "graph";
-  hamilton.addVertex(new Hamilton.Vertex());
-  hamilton.addVertex('2', 225, 150);
-  hamilton.addVertex('derp', 200, 50);
-  hamilton.addVertex('0', 150, 100);
-  hamilton.addEdge('2', 'derp');
-  hamilton.addEdge('0', 'derp');
-  var layout = new Layout(hamilton);
-  console.log(hamilton);
-  layout.layout();
-  layout.applyLayout();
-  hamilton.draw();
+    var hamilton, layout, graph, fgraph; 
+    fgraph = "{{ graph }}";
+    graph = eval(fgraph) || {};
+    console.log("graph: " + graph);
+    hamilton = new Hamilton(document.getElementById('hamilton-canvas'));
+    if (!(graph.vertices && graph.edges)) {
+      hamilton.name = "example";
+      hamilton.type = "graph";
+      hamilton.addVertex(new Hamilton.Vertex());
+      hamilton.addVertex(2, 225, 150);
+      hamilton.addVertex('derp', 200, 50);
+      hamilton.addVertex(0, 150, 100);
+      hamilton.addEdge(2, 'derp');
+      hamilton.addEdge(0, 'derp');
+      layout = new Layout(hamilton);
+      console.log(hamilton);
+      layout.layout();
+      layout.applyLayout();
+    } else {
+      hamilton.setGraph(graph);
+    }
 
+    hamilton.draw();
 
-	function uniqueName(vertices) {
-    var name;
-    var done = false;
-    name = prompt("Enter a vertex label (1-4 characters:");
-    if (name in vertices) {
-      while(!done) {
-        name = prompt("The entered label is in use.\n Enter another vertex label (1-4 characters:");
-        if (name in vertices) done = false
-	      else done = true;
+    function uniqueName(vertices) {
+      var name;
+      var done = false;
+      name = prompt("Enter a vertex label (1-4 characters:");
+      if (name in vertices) {
+        while(!done) {
+          name = prompt("The entered label is in use.\n Enter another vertex label (1-4 characters:");
+          if (name in vertices) done = false
+          else done = true;
+        }
       }
+      return name;
     }
-    return name;
-  }
 
-  $('#add-node').click(function() {
-	                        var x = (hamilton.canvas.width-80) * Math.random();
-	                        var y = (hamilton.canvas.height-80) * Math.random();
-                          var name = prompt("Enter a vertex label (1-4 characters:");
-                          hamilton.addVertex(name, x, y);
-                          hamilton.draw();
-  });
+    $('#add-node').click(function() {
+      var x = (hamilton.canvas.width-80) * Math.random();
+      var y = (hamilton.canvas.height-80) * Math.random();
+      var name = prompt("Enter a vertex label (1-4 characters:");
+      hamilton.addVertex(name, x, y);
+      hamilton.draw();
+    });
 
-  $('#dot-open').click(function() {
-                          $('#dot-code').val(hamilton.toDot());
-                          $('#stage-img').hide();
-                          $('#stage-dot').show();
-                          $('#spotlight').fadeIn(200);
-  });
-  $('#stage-dot').click(function(event) { event.stopPropagation(); });
-  $('#spotlight').click(function() { $(this).fadeOut(200); });
+    $('#dot-open').click(function() {
+      $('#dot-code').val(hamilton.toDot());
+      $('#stage-img').hide();
+      $('#stage-dot').show();
+      $('#spotlight').fadeIn(200);
+    });
+    $('#stage-dot').click(function(event) { event.stopPropagation(); });
+    $('#spotlight').click(function() { $(this).fadeOut(200); });
 
-  $('#save-canvas').click(function() {
-                          doImageCapture(hamilton);
-                          $('#stage-dot').hide();
-                          $('#stage-img').show();
-                          $('#spotlight').fadeIn(200);
-  });
-  function doImageCapture(graph) {
-    var maxx = -Infinity, minx = Infinity, maxy = -Infinity, miny = Infinity;
-    var canvas = document.getElementById('capture-canvas');
-    var context = canvas.getContext("2d");
+    $('#save-canvas').click(function() {
+      doImageCapture(hamilton);
+      $('#stage-dot').hide();
+      $('#stage-img').show();
+      $('#spotlight').fadeIn(200);
+    });
 
-    for (id in graph.vertices) {
-      var x = graph.vertices[id].props.x,
-          y = graph.vertices[id].props.y;
-      if(x > maxx) maxx = x;
-      if(x < minx) minx = x;
-      if(y > maxy) maxy = y;
-      if(y < miny) miny = y;
+    function uniqueName(vertices) {
+      var name;
+      var done = false;
+      name = prompt("Enter a vertex label (1-4 characters:");
+      if (name in vertices) {
+        while(!done) {
+          name = prompt("The entered label is in use.\n Enter another vertex label (1-4 characters:");
+          if (name in vertices) done = false
+          else done = true;
+        }
+      }
+      return name;
     }
-    graph.drawGrid = false;
-    graph.draw();
-    var imgData = graph.context.getImageData(minx-30, miny-30, (maxx-minx+60), (maxy-miny+60));
-    graph.drawGrid = true;
-    canvas.width = (maxx-minx+60);
-    canvas.height = (maxy-miny+60);
-    context.putImageData(imgData, 0,0);
 
-    document.getElementById('canvas-img').src = canvas.toDataURL();
-  }
+    $('#add-node').click(function() {
+      var x = (hamilton.canvas.width-80) * Math.random();
+      var y = (hamilton.canvas.height-80) * Math.random();
+      var name = prompt("Enter a vertex label (1-4 characters:");
+      hamilton.addVertex(name, x, y);
+      hamilton.draw();
+    });
 
+    function doImageCapture(graph) {
+      var maxx = -Infinity, minx = Infinity, maxy = -Infinity, miny = Infinity;
+      var canvas = document.getElementById('capture-canvas');
+      var context = canvas.getContext("2d");
 
+      for (id in graph.vertices) {
+        var x = graph.vertices[id].props.x,
+            y = graph.vertices[id].props.y;
+        if(x > maxx) maxx = x;
+        if(x < minx) minx = x;
+        if(y > maxy) maxy = y;
+        if(y < miny) miny = y;
+      }
+      graph.drawGrid = false;
+      graph.draw();
+      var imgData = graph.context.getImageData(minx-30, miny-30, (maxx-minx+60), (maxy-miny+60));
+      graph.drawGrid = true;
+      canvas.width = (maxx-minx+60);
+      canvas.height = (maxy-miny+60);
+      context.putImageData(imgData, 0,0);
 
+      document.getElementById('canvas-img').src = canvas.toDataURL();
+    }
   </script>
 </div>
 </body>

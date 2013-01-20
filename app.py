@@ -70,7 +70,12 @@ def create_fiddle():
 
 @app.route('/<int:fiddle_id>')
 def get_fiddle(fiddle_id):
-  return json.dumps({'fiddle': fiddle_id})
+  graph = g.db.graphs.find_one({"uid": fiddle_id })
+  if graph:
+    return render_template('index.html', graph=json.dumps(graph))
+  else:
+    # raise 404
+    return "you suck"
 
 if __name__ == '__main__':
   port = int(os.environ.get('PORT', 5000))
