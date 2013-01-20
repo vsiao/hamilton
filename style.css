@@ -104,7 +104,8 @@ h1 {
   font-size: 24px;
 	font-weight: 200;
   display: inline-block;
-  padding: 15px 20px 10px;
+  margin-top: 10px;
+  padding: 20px 20px 10px;
   width: 200;
   white-space: normal;
 }
@@ -174,26 +175,24 @@ h1 {
   display: none;
   position: absolute;
   text-align: center;
+}
 
 #copy-button {
+  background: #349f9f;
   margin-left: 5px;
+  margin-top: -4px;
+  height: 30px;
   float: right;
 }
 
-.btn img {
-  position: relative;
-  top: -7px;
-}
-
 .btn a {
-  background: #349f9f;
   color: #fff;
   display: block;
   font-size: 20px;
   font-weight: 700;
-  height: 20px;
+  height: 30px;
   margin-top: -3px;
-  padding-top: 10px;
+  padding-top: 6px;
   text-align: center;
   text-decoration: none;
   width: 30px;
