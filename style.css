@@ -163,6 +163,7 @@ h1 {
   display: inline-block;
   float: right;
   font-size: 14px;
+  margin: 0;
   padding: 10px 20px;
 }
 
