@@ -1,1 +1,1 @@
-web: python app.py
+web: HAMILTON_SETTINGS=settings.cfg python app.py
