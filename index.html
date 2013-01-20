@@ -57,18 +57,17 @@
   <script type="text/javascript">
     var hamilton, layout, graph, fgraph; 
     fgraph = {{ graph|safe }};
-    graph = fgraph['graph'] || {}
-    console.log("graph: " + JSON.stringify(graph));
+    graph = fgraph['graph'] || {};
     hamilton = new Hamilton(document.getElementById('hamilton-canvas'));
     if (!(graph.vertices && graph.edges)) {
       hamilton.name = "example";
       hamilton.type = "graph";
-      hamilton.addVertex(new Hamilton.Vertex());
-      hamilton.addVertex(2, 225, 150);
-      hamilton.addVertex('derp', 200, 50);
-      hamilton.addVertex(0, 150, 100);
-      hamilton.addEdge(2, 'derp');
-      hamilton.addEdge(0, 'derp');
+      hamilton.addVertex(new Hamilton.Vertex({id: 'd'}));
+      hamilton.addVertex('a', 225, 150);
+      hamilton.addVertex('b', 200, 50);
+      hamilton.addVertex('c', 150, 100);
+      hamilton.addEdge('a', 'b');
+      hamilton.addEdge('c', 'b');
       layout = new Layout(hamilton);
       console.log(hamilton);
       layout.layout();
