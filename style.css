@@ -89,12 +89,14 @@ h1 {
   position: relative;
   text-align: left;
 }
+
 #stage-share {
   background: #218484;
   box-shadow: 0 0 20px #000;
   display: inline-block;
   position: relative;
-  text-align: center;
+  text-align: left;
+  white-space: nowrap;
 }
 
 #permalink {
@@ -103,6 +105,8 @@ h1 {
 	font-weight: 200;
   display: inline-block;
   padding: 15px 20px 10px;
+  width: 200;
+  white-space: normal;
 }
 
 #stage-img {
@@ -161,6 +165,7 @@ h1 {
   margin: 0px 10px 0px 0px;
   padding: 10px 20px;
 }
+
 #vtx-name-change {
   background: #fff;
   border: none;
@@ -169,5 +174,27 @@ h1 {
   display: none;
   position: absolute;
   text-align: center;
+
+#copy-button {
+  margin-left: 5px;
+  float: right;
+}
+
+.btn img {
+  position: relative;
+  top: -7px;
+}
+
+.btn a {
+  background: #349f9f;
+  color: #fff;
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  height: 20px;
+  margin-top: -3px;
+  padding-top: 10px;
+  text-align: center;
+  text-decoration: none;
   width: 30px;
 }
