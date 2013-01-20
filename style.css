@@ -34,10 +34,17 @@ h1 {
   display: block;
   font-size: 20px;
   font-weight: 700;
-  line-height: 36px;
+  line-height: 37px;
   padding: 20px 0;
   text-align: center;
   text-decoration: none;
+  width: 100px;
+}
+#nav li span {
+  background: #9ace33;
+  display: block;
+  padding: 19px 0;
+
   width: 100px;
 }
 #hamilton-canvas {
