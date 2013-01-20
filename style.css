@@ -18,6 +18,13 @@ h1 {
   text-align: center;
   width: 199px;
 }
+h1 a {
+  color: white;
+  text-decoration: none;
+}
+h1 a:hover {
+  text-decoration: underline;
+}
 .container {
   margin: 0 auto;
   position: relative;
