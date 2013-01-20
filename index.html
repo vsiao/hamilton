@@ -22,6 +22,7 @@
   <canvas id="capture-canvas">
   Broseph
   </canvas>
+
   <div id="spotlight" style="display:none;">
     <div id="wrapper">
       <div id="stage-dot">
@@ -37,6 +38,10 @@
       <img id="canvas-img" alt="Right click to save me!">
       <h3>Right click and select save as...</h3>
       </div>
+      <div id="stage-share">
+      <h2>Graph link created!</h2>
+      <span id="permalink"><a href="">Here is a permalink to your graph</a></span>
+      </div>
     </div>
   </div>
   <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
@@ -48,7 +53,7 @@
   <script type="text/javascript" src="/static/lib/Edge.js"></script>
   <script type="text/javascript" src="/static/lib/Layout.js"></script>
   <script type="text/javascript">
-    var hamilton, layout, graph, fgraph; 
+    var hamilton, layout, graph, fgraph;
     fgraph = {{ graph|safe }};
     graph = fgraph['graph'] || {};
     hamilton = new Hamilton(document.getElementById('hamilton-canvas'));
@@ -71,63 +76,40 @@
 
     hamilton.draw();
 
-    function uniqueName(vertices) {
-      var name;
-      var done = false;
-      name = prompt("Enter a vertex label (1-4 characters:");
-      if (name in vertices) {
-        while(!done) {
-          name = prompt("The entered label is in use.\n Enter another vertex label (1-4 characters:");
-          if (name in vertices) done = false
-          else done = true;
-        }
-      }
-      return name;
-    }
-
-    $('#add-node').click(function() {
-      var x = (hamilton.canvas.width-80) * Math.random();
-      var y = (hamilton.canvas.height-80) * Math.random();
-      var name = prompt("Enter a vertex label (1-4 characters:");
-      hamilton.addVertex(name, x, y);
-      hamilton.draw();
-    });
 
     $('#dot-open').click(function() {
       $('#dot-code').val(hamilton.toDot());
+      $('#stage-share').hide();
       $('#stage-img').hide();
       $('#stage-dot').show();
       $('#spotlight').fadeIn(200);
     });
     $('#stage-dot').click(function(event) { event.stopPropagation(); });
+    $('#stage-share').click(function(event) { event.stopPropagation(); });
     $('#spotlight').click(function() { $(this).fadeOut(200); });
 
     $('#save-canvas').click(function() {
       doImageCapture(hamilton);
+      $('#stage-share').hide();
       $('#stage-dot').hide();
       $('#stage-img').show();
       $('#spotlight').fadeIn(200);
     });
 
-    function uniqueName(vertices) {
-      var name;
-      var done = false;
-      name = prompt("Enter a vertex label (1-4 characters:");
-      if (name in vertices) {
-        while(!done) {
-          name = prompt("The entered label is in use.\n Enter another vertex label (1-4 characters:");
-          if (name in vertices) done = false
-          else done = true;
-        }
-      }
-      return name;
-    }
+    $('#share-link').click(function() {
+      doImageCapture(hamilton);
+      $('#stage-share').show();
+      $('#stage-dot').hide();
+      $('#stage-img').hide();
+      $('#spotlight').fadeIn(200);
+    });
+
+
 
     $('#add-node').click(function() {
       var x = (hamilton.canvas.width-80) * Math.random();
       var y = (hamilton.canvas.height-80) * Math.random();
-      var name = prompt("Enter a vertex label (1-4 characters:");
-      hamilton.addVertex(name, x, y);
+      hamilton.addVertex("wwq", x, y);
       hamilton.draw();
     });
 

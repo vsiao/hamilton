@@ -88,6 +88,22 @@ h1 {
   position: relative;
   text-align: left;
 }
+#stage-share {
+  background: #218484;
+  box-shadow: 0 0 20px #000;
+  display: inline-block;
+  position: relative;
+  text-align: center;
+}
+
+#permalink {
+	background: #fff;
+  font-size: 24px;
+	font-weight: 200;
+  display: inline-block;
+  padding: 15px 20px 10px;
+}
+
 #stage-img {
   background: #218484;
   box-shadow: 0 0 20px #000;
@@ -97,6 +113,7 @@ h1 {
 }
 #canvas-img {
   background: #fff;
+  display: inline-block;
   align: center;
 }
 #spotlight h2 {
