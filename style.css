@@ -45,6 +45,9 @@ h1 {
 }
 #capture-canvas {
   background: #fff;
+	left: 0;
+  top: 0;
+  position:absolute;
   visibility: hidden;
 }
 #spotlight {
@@ -65,17 +68,33 @@ h1 {
   vertical-align: middle;
   width: 100%;
 }
-#stage {
+#stage-dot {
   background: #218484;
   box-shadow: 0 0 20px #000;
   display: inline-block;
   position: relative;
   text-align: left;
 }
+#stage-img {
+  background: #218484;
+  box-shadow: 0 0 20px #000;
+  display: inline-block;
+  position: relative;
+  text-align: left;
+}
+#canvas-img {
+  background: #fff;
+}
 #spotlight h2 {
   color: #fff;
   font-size: 24px;
   padding: 15px 20px 10px;
+}
+#spotlight h3 {
+  color: #fff;
+  font-size: 14px;
+  padding: 10px 20px 10px;
+	text-align:center;
 }
 #dot-code {
   border: none;
