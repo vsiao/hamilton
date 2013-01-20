@@ -47,7 +47,7 @@
     </div>
   </div>
   <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-  <script type="text/javascript" src="/static/lib/ZeroClipboard.js"></script>
+  <script type="text/javascript" src="/static/lib/ZeroClipboard.min.js"></script>
   <script type="text/javascript" src="/static/lib/Dot.js"></script>
 
   <script type="text/javascript" src="/static/lib/util.js"></script>
@@ -122,8 +122,6 @@
       $('#spotlight').fadeIn(200);
     });
 
-
-
     $('#add-node').click(function() {
       var x = (hamilton.canvas.width-80) * Math.random();
       var y = (hamilton.canvas.height-80) * Math.random();
@@ -154,6 +152,10 @@
       context.putImageData(imgData, 0,0);
 
       document.getElementById('canvas-img').src = canvas.toDataURL();
+
+      clip = new ZeroClipboard($('#clipboard'), {
+        moviePath: "/static/ZeroClipboard.swf"    
+      });
     }
   </script>
 </div>

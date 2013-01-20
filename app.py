@@ -61,8 +61,6 @@ def create_fiddle():
   try:
     graphobj = json.loads(request.data)['graph']
     uid = shortuuid.uuid()[:8]
-    print uid
-    print graphobj
     g.db.graphs.insert({'uid': uid, 'graph': graphobj})
     return json.dumps({'status': 'success', 'uid': unicode(uid)})
   except KeyError, err:
