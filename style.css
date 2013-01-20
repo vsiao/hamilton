@@ -117,6 +117,39 @@ h1 {
   position: relative;
   text-align: left;
 }
+
+#help-dialog {
+  background: #218484;
+  box-shadow: 0 0 20px #000;
+  display: inline-block;
+  position: relative;
+  text-align: center;
+}
+
+#help-dialog h4 {
+  color: #000;
+  font-size: 16px;
+  padding: 10px 20px 10px;
+	text-align:center;
+}
+
+#help-div0 {
+  background: #fff;
+  display: block;
+  float: left;
+  margin: 10px;
+}
+#help-div1 h3 {
+  color: black;
+}
+#help-div1 {
+  background: #fff;
+  display: block;
+  color: black;
+  float: left;
+  margin: 10px;
+}
+
 #canvas-img {
   background: #fff;
   display: inline-block;

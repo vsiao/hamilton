@@ -15,6 +15,7 @@
 <!--    <li><a href="#">&ndash;E</a></li>-->
     <li><a href="#" id="save-canvas"><img src="/static/img/download.png" width="40" height="30"></a></li>
     <li><a href="#" id="share-link"><img src="/static/img/share.png" width="30" height="30"></a></li>
+    <li><a href="#" id="help-link"><img src="/static/img/help.png" width="30" height="30"></a></li>
   </ul>
   <canvas id="hamilton-canvas" width="901px" height="601px">
   Bro, get some HTML5 Canvas.
@@ -32,6 +33,17 @@
         <input type="button" id="dot-go" value="Go" />
         <input type="button" id="reset-layout" value="Reset" />
       </form>
+      </div>
+      <div id="help-dialog">
+				<h2>How to graph</h2>
+				<div id="help-div0">
+					<h4>The menu links</h4>
+					<img id="how-to0" alt="The menu" src="/static/img/help-0.png">
+				</div>
+				<div id="help-div1">
+					<h4>Click on a vertex to see the  ring UI </h4>
+					<img id="how-to1" alt="The menu" src="/static/img/help-1.png">
+				</div>
       </div>
       <div id="stage-img">
       <h2>Export to image.</h2>
@@ -113,6 +125,7 @@
       $('#dot-code').val(hamilton.toDot());
       $('#stage-share').hide();
       $('#stage-img').hide();
+      $('#help-dialog').hide();
       $('#stage-dot').show();
       $('#spotlight').fadeIn(200);
     });
@@ -123,8 +136,17 @@
     $('#save-canvas').click(function() {
       doImageCapture(hamilton);
       $('#stage-share').hide();
+      $('#help-dialog').hide();
       $('#stage-dot').hide();
       $('#stage-img').show();
+      $('#spotlight').fadeIn(200);
+    });
+
+    $('#help-link').click(function() {
+      $('#stage-share').hide();
+      $('#stage-dot').hide();
+      $('#stage-img').hide();
+      $('#help-dialog').show();
       $('#spotlight').fadeIn(200);
     });
 
@@ -133,6 +155,7 @@
       $('#stage-share').show();
       $('#stage-dot').hide();
       $('#stage-img').hide();
+      $('#help-dialog').hide();
       $('#spotlight').fadeIn(200);
     });
 
