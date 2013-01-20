@@ -1,4 +1,4 @@
 hamilton
 ========
 
-draggy javascript canvas editable svg graph visualization doohickey for mackey idolizers
+draggy javascript canvas editable canvas graph visualization doohickey for mackey idolizers
