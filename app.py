@@ -10,7 +10,7 @@ from pymongo import MongoClient
 MONGO_URI = "mongodb://localhost"
 DEBUG = True
 
-app = Flask(__name__, static_folder=".", template_folder=".", static_url_path="")
+app = Flask(__name__, static_folder=".", template_folder=".", static_url_path="/static")
 app.config.from_object(__name__)
 app.config.from_envvar('HAMILTON_SETTINGS', silent=True)
 
@@ -24,7 +24,7 @@ def disconnect_from_db(exception):
 
 @app.route('/')
 def index():
-  return render_template('index.html')
+  return render_template('index.html', graph="{}")
 
 @app.route('/parse', methods=['GET', 'POST'])
 def parse():
@@ -68,10 +68,11 @@ def create_fiddle():
     message = err.line + ": sent bad graph data: %s" % str(err)
     return json.dumps({'status': 'error', 'message': unicode(message)})
 
-@app.route('/<int:fiddle_id>')
+@app.route('/<fiddle_id>')
 def get_fiddle(fiddle_id):
   graph = g.db.graphs.find_one({"uid": fiddle_id })
   if graph:
+    del graph['_id']
     return render_template('index.html', graph=json.dumps(graph))
   else:
     # raise 404

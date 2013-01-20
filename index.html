@@ -2,16 +2,16 @@
 <html>
 <head>
   <title>Hamilton</title>
-  <link rel="stylesheet" type="text/css" href="reset.css" />
+  <link rel="stylesheet" type="text/css" href="/static/reset.css" />
   <link href="http://fonts.googleapis.com/css?family=Inconsolata:400,700" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" type="text/css" href="style.css" />
+  <link rel="stylesheet" type="text/css" href="/static/style.css" />
 </head>
 <body>
 <div class="container">
   <h1>Hamilton</h1>
   <ul id="nav">
     <li><a href="#" id="dot-open">DOT</a></li>
-    <li><a href="#" id="add-node"><img src="img/plus.png" width="30" height="30"></a></li>
+    <li><a href="#" id="add-node"><img src="/static/img/plus.png" width="30" height="30"></a></li>
     <li><span></span></li>
 		<li><span></span></li>
     <li><span></span></li>
@@ -19,8 +19,8 @@
     <li><span></span></li>
 		<li><span></span></li>
 		<li><span></span></li>
-    <li><a href="#" id="save-canvas"><img src="img/download.png" width="30" height="30"></a></li>
-    <li><a href="#" id="share-link"><img src="img/share.png" width="30" height="30"></a></li>
+    <li><a href="#" id="save-canvas"><img src="/static/img/download.png" width="30" height="30"></a></li>
+    <li><a href="#" id="share-link"><img src="/static/img/share.png" width="30" height="30"></a></li>
 
   </ul>
   <canvas id="hamilton-canvas" width="860px" height="600px">
@@ -47,18 +47,18 @@
     </div>
   </div>
   <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-  <script type="text/javascript" src="lib/Dot.js"></script>
+  <script type="text/javascript" src="/static/lib/Dot.js"></script>
 
-  <script type="text/javascript" src="lib/util.js"></script>
-  <script type="text/javascript" src="lib/Hamilton.js"></script>
-  <script type="text/javascript" src="lib/Vertex.js"></script>
-  <script type="text/javascript" src="lib/Edge.js"></script>
-  <script type="text/javascript" src="lib/Layout.js"></script>
+  <script type="text/javascript" src="/static/lib/util.js"></script>
+  <script type="text/javascript" src="/static/lib/Hamilton.js"></script>
+  <script type="text/javascript" src="/static/lib/Vertex.js"></script>
+  <script type="text/javascript" src="/static/lib/Edge.js"></script>
+  <script type="text/javascript" src="/static/lib/Layout.js"></script>
   <script type="text/javascript">
     var hamilton, layout, graph, fgraph; 
-    fgraph = "{{ graph }}";
-    graph = eval(fgraph) || {};
-    console.log("graph: " + graph);
+    fgraph = {{ graph|safe }};
+    graph = fgraph['graph'] || {}
+    console.log("graph: " + JSON.stringify(graph));
     hamilton = new Hamilton(document.getElementById('hamilton-canvas'));
     if (!(graph.vertices && graph.edges)) {
       hamilton.name = "example";
