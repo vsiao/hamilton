@@ -136,19 +136,29 @@
       $('#spotlight').fadeIn(200);
     });
 
-    $('#add-vtx').click(function() {
-      if (hamilton._dummy) {
+    function STAHPIT(event) {
+      if (event.keyCode == 27 /* esc */) {
         delete hamilton.vertices[hamilton._dummy.id];
         hamilton._dummy = null;
         hamilton.draw();
+        $('#add-vtx').css('background', '');
+        document.removeListener('keyup', STAHPIT);
+      }
+    }
+
+    $('#add-vtx').click(function() {
+      if (hamilton._dummy) {
+        STAHPIT({keyCode: 27});
         return;
       }
+      $(this).css('background', '#002828');
       hamilton.confirmName();
       hamilton._selected &&
         (hamilton._selected._selected = false, hamilton._selected = null);
       hamilton._EDGEADDER9000 = false;
       hamilton.draw();
       hamilton.ENTERVERTEXADDMODE();
+      document.addEventListener('keyup', STAHPIT);
       return false;
     });
 
