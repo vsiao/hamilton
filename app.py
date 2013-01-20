@@ -1,10 +1,26 @@
 #!/usr/bin/python
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, g
 import json
 import os
 import pydot
+import shortuuid
 from dot_parser import ParseException
+from pymongo import MongoClient
+
+MONGO_URI = "mongodb://localhost"
+DEBUG = True
+
 app = Flask(__name__, static_folder=".", template_folder=".", static_url_path="")
+app.config.from_object(__name__)
+app.config.from_envvar('HAMILTON_SETTINGS', silent=True)
+
+@app.before_request
+def connect_to_db():
+  g.db = MongoClient(app.config["MONGO_URI"]).hamilton
+
+@app.teardown_request
+def disconnect_from_db(exception):
+  g.db.connection.disconnect()
 
 @app.route('/')
 def index():
@@ -39,8 +55,23 @@ def parse():
     message = err.line + "\n" + " "*(err.column-1) + "^" + "\n\n" + str(err)
     return json.dumps({'status' : 'error', 'message': unicode(message)})
 
+@app.route('/create', methods=['GET', 'POST'])
+def create_fiddle():
+  try:
+    graphobj = json.loads(request.data)['graph']
+    uid = shortuuid.uuid()[:8]
+    print uid
+    print graphobj
+    g.db.graphs.insert({'uid': uid, 'graph': graphobj})
+    return json.dumps({'status': 'success', 'uid': unicode(uid)})
+  except KeyError, err:
+    message = err.line + ": sent bad graph data: %s" % str(err)
+    return json.dumps({'status': 'error', 'message': unicode(message)})
+
+@app.route('/<int:fiddle_id>')
+def get_fiddle(fiddle_id):
+  return json.dumps({'fiddle': fiddle_id})
+
 if __name__ == '__main__':
-  debug = bool(os.environ.get('DEBUG', False))
-  app.debug = debug
   port = int(os.environ.get('PORT', 5000))
   app.run(host='0.0.0.0', port=port)
