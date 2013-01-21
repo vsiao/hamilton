@@ -155,6 +155,14 @@ h1 a:hover {
   margin: 10px;
 }
 
+#help-shortcuts {
+  color: white;
+  clear:both;
+  margin: 10px;
+  width: 560px;
+	padding: 10px 20px 10px;
+}
+
 #canvas-img {
   background: #fff;
   display: inline-block;

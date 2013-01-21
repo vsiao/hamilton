@@ -44,6 +44,7 @@
 					<h4>Click on a vertex to see the  ring UI </h4>
 					<img id="how-to1" alt="The menu" src="/static/img/help-1.png">
 				</div>
+				<div id="help-shortcuts"> Keyboard shortcuts: (v) - enter add vertex mode, (x) - delete selected vertex, (e) - enter edge adding mode for selected vertex. </div>
       </div>
       <div id="stage-img">
       <h2>Export to image.</h2>
@@ -78,46 +79,38 @@
     fgraph = {{ graph|safe }};
     graph = fgraph['graph'] || {};
     hamilton = new Hamilton(document.getElementById('hamilton-canvas'));
-    if (!(graph.vertices && graph.edges)) {
-		  // hamilton.name = "example";
-      // hamilton.type = "graph";
-      // hamilton.addVertex(new Hamilton.Vertex({id: 'A'}));
-      // hamilton.addVertex('B', 225, 150);
-      // hamilton.addVertex('C', 200, 50);
-      // hamilton.addVertex('D', 150, 100);
-      // hamilton.addVertex('E', 225, 150);
-      // hamilton.addVertex('F', 200, 50);
-      // hamilton.addVertex('G', 150, 100);
-      // hamilton.addVertex('X', 225, 150);
-      // hamilton.addVertex('U', 200, 50);
-      // hamilton.addVertex('K', 150, 100);
 
-      // hamilton.addEdge('A', 'B');
-      // hamilton.addEdge('A', 'G');
-      // hamilton.addEdge('G', 'B');
-      // hamilton.addEdge('C', 'U');
-      // hamilton.addEdge('F', 'C');
-      // hamilton.addEdge('D', 'B');
-      // hamilton.addEdge('E', 'D');
-      // hamilton.addEdge('K', 'U');
-      // hamilton.addEdge('X', 'D');
-      // hamilton.addEdge('X', 'K');
-
-      // layout = new Layout(hamilton);
-      // console.log(hamilton);
-      // layout.layout();
-      // layout.applyLayout();
-    } else {
+    if (graph.vertices && graph.edges) {
       hamilton.setGraph(graph);
     }
 
     hamilton.draw();
 
     $(document).keyup(function(event) {
-      if (event.keyCode === 13 /* ENTER */) {
-        if (hamilton._NAMECHANGER10K) {
-          hamilton.confirmName();
-        }
+      switch (event.keyCode) {
+        case 13: /* ENTER */
+          if (hamilton._NAMECHANGER10K) {
+            hamilton.confirmName();
+          }
+          break;
+        case 86: /* v */
+          if (!hamilton._dummy) {
+            $('#add-vtx').click();
+          }
+          break;
+        case 69: /* e */
+          if (hamilton._selected && !this._EDGEADDER9000) {
+            hamilton._focus && (hamilton._focus._hover = false);
+            hamilton._focus = hamilton._selected._eAddBtn;
+            hamilton._onClick();
+          }
+          break;
+        case 88: /* x */
+          if (hamilton._selected) {
+            hamilton._focus && (hamilton._focus._hover = false);
+            hamilton._focus = hamilton._selected._delBtn;
+            hamilton._onClick();
+          }
       }
     });
 
@@ -165,7 +158,7 @@
         hamilton._dummy = null;
         hamilton.draw();
         $('#add-vtx').css('background', '');
-        document.removeListener('keyup', STAHPIT);
+        document.removeEventListener('keyup', STAHPIT);
       }
     }
 
