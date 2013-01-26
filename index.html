@@ -16,6 +16,7 @@
     <li><a href="#" id="save-canvas"><img src="/static/img/download.png" width="40" height="30"></a></li>
     <li><a href="#" id="share-link"><img src="/static/img/share.png" width="30" height="30"></a></li>
     <li><a href="#" id="help-link"><img src="/static/img/help.png" width="30" height="30"></a></li>
+    <li><a href="#" id="toggle-directed"><img src="/static/img/arrow.png" width="30" height="30"></a></li>
   </ul>
   <canvas id="hamilton-canvas" width="901px" height="601px">
   Bro, get some HTML5 Canvas.
@@ -94,9 +95,7 @@
           }
           break;
         case 86: /* v */
-          if (!hamilton._dummy) {
-            $('#add-vtx').click();
-          }
+          $('#add-vtx').click();
           break;
         case 69: /* e */
           if (hamilton._selected && !this._EDGEADDER9000) {
@@ -155,6 +154,7 @@
     function STAHPIT(event) {
       if (event.keyCode == 27 /* esc */) {
         delete hamilton.vertices[hamilton._dummy.id];
+        __HAM_VTX_ID--;
         hamilton._dummy = null;
         hamilton.draw();
         $('#add-vtx').css('background', '');
@@ -176,6 +176,16 @@
       hamilton.ENTERVERTEXADDMODE();
       document.addEventListener('keyup', STAHPIT);
       return false;
+    });
+
+    $('#toggle-directed').click(function () {
+      if (hamilton._directed) {
+        $('#toggle-directed').css('background', '');
+      } else {
+        $('#toggle-directed').css('background', '#002828');
+      }
+      hamilton._directed = !hamilton._directed;
+      hamilton.draw();
     });
 
     function doImageCapture(graph) {
