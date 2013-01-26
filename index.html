@@ -94,9 +94,7 @@
           }
           break;
         case 86: /* v */
-          if (!hamilton._dummy) {
-            $('#add-vtx').click();
-          }
+          $('#add-vtx').click();
           break;
         case 69: /* e */
           if (hamilton._selected && !this._EDGEADDER9000) {
@@ -155,6 +153,7 @@
     function STAHPIT(event) {
       if (event.keyCode == 27 /* esc */) {
         delete hamilton.vertices[hamilton._dummy.id];
+        __HAM_VTX_ID--;
         hamilton._dummy = null;
         hamilton.draw();
         $('#add-vtx').css('background', '');
