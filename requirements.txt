@@ -1,4 +1,4 @@
 Flask==1.0
 pyparsing==1.5.6
-pymongo==2.4.1
+pymongo==2.5.2
 shortuuid==0.3
